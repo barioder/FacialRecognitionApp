@@ -30,7 +30,7 @@ def findEcodings (imgList):
         encodeList.append(encodedImg)
     return encodeList
 
-def markAtt(name):
+#def markAtt(name):
 
 
 
