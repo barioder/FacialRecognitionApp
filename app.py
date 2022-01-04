@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import face_recognition
 import os
+from datetime import datetime
 
 # to access the images in the folder
 path = 'participants'
@@ -30,7 +31,26 @@ def findEcodings (imgList):
         encodeList.append(encodedImg)
     return encodeList
 
-#def markAtt(name):
+def markAtt(name):
+    with open('Attendance.csv', 'r+') as f:
+        # to ensure recoding attendance just once
+        myDataList = f.readlines()
+        nameList = []
+        for line in myDataList:
+            entry = line.split(',')
+            nameList.append(entry[0])
+
+        # find arrival time if person is not on attendance list already
+        if name not in nameList:
+            now = datetime.now()
+            dtString = now.strftime('%H:%M:%S')
+            f.writelines(f'\n{name},{dtString}')
+        print(myDataList)
+
+markAtt("a")
+
+
+
 
 
 
