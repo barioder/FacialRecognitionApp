@@ -9,13 +9,18 @@ path = 'participants'
 images = []
 classNames = []
 
-# grab the list of images directory
+# used the os dependency to grab the list of images in my directory
 photos = os.listdir(path)
 print(photos)
+print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
 
-# to import the images one by one
+
+# load all our images from the directory
 for photo in photos:
+
     currPhoto = cv2.imread(f'{path}/{photo}')
+
+# append all the photos and only the file name with no extension to the lists created earlier
     images.append(currPhoto)
     classNames.append(os.path.splitext(photo)[0])
 print(classNames)
@@ -47,7 +52,7 @@ def markAtt(name):
             f.writelines(f'\n{name},{dtString}')
         print(myDataList)
 
-markAtt("a")
+
 
 
 
@@ -60,7 +65,6 @@ print('Encoding Complete')
 
 # initialise the webcam
 cap = cv2.VideoCapture(0)
-
 # while loop to capture each frame one by one
 while True:
     # read frame from a camera
@@ -90,6 +94,7 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2-35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            markAtt(name)
 
 
 
